@@ -2,12 +2,13 @@ const express = require('express')
 
 var io = require('socket.io')
 ({
-  path: '/my-app'
+  path: '/io/my-app'
 })
 
 const app = express()
 const port = 8080
 
+// app.get('/', (req, res) => res.send('Hello World!!!!!'))
 
 //https://expressjs.com/en/guide/writing-middleware.html
 app.use(express.static(__dirname + '/build'))
@@ -19,10 +20,15 @@ const server = app.listen(port, () => console.log(`Example app listening on port
 
 io.listen(server)
 
-//  https://www.tutorialspoint.com/socket.io/socket.io_namespaces.htm
+// default namespace
+io.on('connection', socket => {
+  console.log('connected')
+})
+
+// https://www.tutorialspoint.com/socket.io/socket.io_namespaces.htm
 const peers = io.of('/webrtcPeer')
 
-//  keep a reference of all socket connections
+// keep a reference of all socket connections
 let connectedPeers = new Map()
 
 peers.on('connection', socket => {
