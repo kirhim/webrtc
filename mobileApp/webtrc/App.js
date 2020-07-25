@@ -50,7 +50,7 @@ class App extends React.Component {
   componentDidMount = () => {
 
     this.socket = io.connect(
-      'https://28919917623e.ngrok.io/webrtcPeer',
+      'https://28919917623e.ngrok.io/webrtcPeer', //ngrok 주소 웹이랑 매치시키기
       {
         path: '/io/my-app',
         query: {}
